@@ -6,7 +6,7 @@ export default function Intro() {
   return (
     <div className="container intro mt-5">
       <div className="row">
-        <div className="col-7">
+        <div className="col-12 col-md-7">
           <h1 className="display-3">
             Travel, enjoy and live a new and full life
           </h1>
@@ -26,7 +26,7 @@ export default function Intro() {
             Explore
           </button>
         </div>
-        <div className="col-5">
+        <div className="col-12 col-md-5">
           <img src={intro} className="img-fluid" alt="Not found" />
         </div>
       </div>

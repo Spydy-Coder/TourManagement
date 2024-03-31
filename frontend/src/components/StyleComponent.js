@@ -10,7 +10,7 @@ export default function StyleComponent() {
   return (
     <div className="container py-5">
       <div className="row ">
-        <div className="col-6">
+        <div className="col-12 col-md-6">
           <h4 className="text-uppercase first-heading">Easy and fast</h4>
           <h2 className="fw-bold second-heading ">Book Your Next Trip</h2>
           <ul className="list-unstyled mt-5">
@@ -18,7 +18,7 @@ export default function StyleComponent() {
               <img
                 src={travel}
                 alt="Icon"
-                class="img-fluid  my-auto icons"
+                className="img-fluid  my-auto icons"
                 style={{width: "40px", height: "40px"}}
               />
               <div className="ms-4" >
@@ -30,9 +30,9 @@ export default function StyleComponent() {
           <ul className="list-unstyled mt-2">
             <li className="d-flex ">
               <img
-                src={destination}
+                src={bill}
                 alt="Icon"
-                class="img-fluid  my-auto icons"
+                className="img-fluid  my-auto icons"
                 style={{width: "40px", height: "40px"}}
               />
               <div className="ms-4" >
@@ -46,7 +46,7 @@ export default function StyleComponent() {
               <img
                 src={suitcase}
                 alt="Icon"
-                class="img-fluid my-auto icons"
+                className="img-fluid my-auto icons"
                 style={{width: "40px", height: "40px"}}
               />
               <div className="ms-4" >
@@ -58,9 +58,9 @@ export default function StyleComponent() {
           <ul className="list-unstyled mt-2">
             <li className="d-flex ">
               <img
-                src={bill}
+                src={destination}
                 alt="Icon"
-                class="img-fluid my-auto icons"
+                className="img-fluid my-auto icons"
                 style={{width: "40px", height: "40px"}}
               />
               <div className="ms-4" >
@@ -70,7 +70,7 @@ export default function StyleComponent() {
             </li>
           </ul>
         </div>
-        <div className="col-6 text-center">
+        <div className="col-12 col-md-6 text-center mt-4 mt-md-0">
         <img src={world} className="img-fluid world-img rounded-circle shadow " alt="Not found" />
         </div>
       </div>
