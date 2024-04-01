@@ -18,7 +18,10 @@ export default function Navbar() {
             
           </div>
           <button className="btn  me-2 nav-button" type="button">User</button>
-            <button className="btn  me-2 nav-button" type="button">Admin</button>
+          <a href="/admin/dashboard">
+          <button className="btn  me-2 nav-button" type="button">Admin</button>
+          </a>
+            
         </div>
       </div>
     </nav>
