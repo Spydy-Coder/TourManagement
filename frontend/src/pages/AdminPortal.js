@@ -22,11 +22,11 @@ export default function AdminPortal() {
       });
       // console.log(response);
       const contentType = response.headers.get("content-type");
-      if ((!contentType || !contentType.includes("application/json"))) {
+      if (!contentType || !contentType.includes("application/json")) {
         return;
       }
-      if(!response.ok){
-        setUserData({id: false});
+      if (!response.ok) {
+        setUserData({ id: false });
         console.log("this is running");
         return;
       }
@@ -45,7 +45,13 @@ export default function AdminPortal() {
         </div>
         <div className="col-9">
           <div className="welcome-user">
-            <h4 className="welcome-text pt-3 text-muted">Welcome {userData.name}</h4>
+            {userData ? (
+              <h4 className="welcome-text pt-3 text-muted">
+                Welcome {userData.name}
+              </h4>
+            ) : (
+              <h4 className="welcome-text pt-3 text-muted">Welcome User</h4>
+            )}
           </div>
           <h4 className="mt-4">All Packages</h4>
           <hr></hr>
