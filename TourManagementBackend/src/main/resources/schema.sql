@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS tour (
     description LONGTEXT,
     start_date DATE,
     end_date DATE,
-    timestamp DATETIME,
+    timestamp VARCHAR(40),
     image VARCHAR(255),
     price INT,
     destination LONGTEXT,

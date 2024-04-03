@@ -6,6 +6,7 @@
   letter-spacing: 1px;
 }
 button {
+  border: none;
   background: linear-gradient(to right, #fe5252, #ffb89a);
 }
 

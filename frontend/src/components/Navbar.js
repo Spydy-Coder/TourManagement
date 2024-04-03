@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { googleLogout } from "@react-oauth/google";
 
 export default function Navbar() {
-  const navigate  = useNavigate();
+  const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
   useEffect(() => {
     let currUser = localStorage.getItem("token");
@@ -23,7 +23,10 @@ export default function Navbar() {
       });
       // console.log(response);
       const contentType = response.headers.get("content-type");
-      if ((!contentType || !contentType.includes("application/json")) && !response.ok) {
+      if (
+        (!contentType || !contentType.includes("application/json")) &&
+        !response.ok
+      ) {
         const json = await response.json();
         setUserData(json);
         return;
@@ -40,7 +43,6 @@ export default function Navbar() {
     localStorage.clear();
     navigate("/");
   };
-
 
   return (
     <nav className="navbar navbar-expand-lg ">
@@ -84,17 +86,22 @@ export default function Navbar() {
           <button className="btn  me-2 nav-button" type="button">
             User
           </button>
-          
-          {(localStorage.getItem("token"))===null ? (
+          {localStorage.getItem("token") === null ? (
             <a href="/login">
               <button className="btn  me-2 nav-button" type="button">
                 Admin
               </button>
             </a>
           ) : (
-              <button className="btn  me-2 nav-button" type="button" onClick={()=>{logout()}}>
-                Logout
-              </button>
+            <button
+              className="btn  me-2 nav-button"
+              type="button"
+              onClick={() => {
+                logout();
+              }}
+            >
+              Logout
+            </button>
           )}
         </div>
       </div>

@@ -16,7 +16,13 @@ public class TourService {
 	private TourRepository repo;
 
 	public void saveTour(Tour t) {
-		repo.save(t);
+		try {
+			repo.save(t);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public List<Tour> findAll() {

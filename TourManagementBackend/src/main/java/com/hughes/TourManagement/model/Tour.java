@@ -1,5 +1,8 @@
 package com.hughes.TourManagement.model;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,6 +23,11 @@ public class Tour {
 	private String startDate;
 	private String endDate;
 	private String timestamp;
+	
+	public static String convertDateFormat(String dateString) {
+        LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        return date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    }
 
 	public int getDays() {
 		return days;

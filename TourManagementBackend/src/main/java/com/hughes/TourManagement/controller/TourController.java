@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,9 +27,9 @@ public class TourController {
 	private TourService tservice;
 	
 	@PostMapping("/create")
-	public String create(@RequestBody Tour tour) {
+	public ResponseEntity<String> create(@RequestBody Tour tour) {
 		tservice.saveTour(tour);
-		return "Tour Added Successfully!";
+		return ResponseEntity.ok().body("{\"message\": \"Tour Added Successfully!\"}");
 	}
 	
 	@GetMapping("/displayAll")
