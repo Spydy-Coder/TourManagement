@@ -23,7 +23,16 @@ public class Tour {
 	private String startDate;
 	private String endDate;
 	private String timestamp;
+	private int adminId;
 	
+	public int getAdminId() {
+		return adminId;
+	}
+
+	public void setAdminId(int adminId) {
+		this.adminId = adminId;
+	}
+
 	public static String convertDateFormat(String dateString) {
         LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         return date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));

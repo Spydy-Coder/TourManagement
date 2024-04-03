@@ -9,7 +9,10 @@ CREATE TABLE IF NOT EXISTS tour (
     price INT,
     destination LONGTEXT,
     days INT,
-    PRIMARY KEY (tour_id)
+    admin_id INT,
+    PRIMARY KEY (tour_id),
+    FOREIGN KEY(admin_id) REFERENCES User(id)
+    ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS User(

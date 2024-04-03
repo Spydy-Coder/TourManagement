@@ -21,41 +21,40 @@ export default function CreateForm() {
     });
   };
 
-  const handleClear = ()=>{
+  const handleClear = () => {
     setFormData({
-        name: "",
-        destination: "",
-        days: "",
-        startDate: null,
-        endDate: null,
-        image: "",
-        price: "",
-        description: "",
-      });
-  }
+      name: "",
+      destination: "",
+      days: "",
+      startDate: null,
+      endDate: null,
+      image: "",
+      price: "",
+      description: "",
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const timestamp = new Date().toISOString();
-    
+
     const finalData = {
       ...formData,
       timestamp: timestamp,
     };
-    
+
     try {
       const response = await fetch("http://localhost:8080/api/pin/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "token": localStorage.getItem("token")
+          token: localStorage.getItem("token"),
         },
         body: JSON.stringify(finalData),
       });
-        const data = await response.json();
+      const data = await response.json();
       console.log("Server response:", data.message);
-      // Reset form fields if submission is successful
       handleClear();
     } catch (error) {
       console.error("Error:", error);
@@ -119,7 +118,6 @@ export default function CreateForm() {
               placeholder="Enter Start Date"
               onChange={handleChange}
               value={formData.startDate}
-              
             />
           </div>
           <div className="form-group mb-3">
@@ -177,12 +175,13 @@ export default function CreateForm() {
           ></textarea>
         </div>
         <div className="d-flex gap-4">
-        <button type="submit" className="btn form-button">
-          Submit
-        </button>
-        <button type="reset" class="btn form-button" onClick={handleClear}>Clear</button>
+          <button type="submit" className="btn form-button">
+            Submit
+          </button>
+          <button type="reset" class="btn form-button" onClick={handleClear}>
+            Clear
+          </button>
         </div>
-        
       </form>
     </div>
   );

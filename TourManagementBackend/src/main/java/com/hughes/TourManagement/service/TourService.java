@@ -33,6 +33,7 @@ public class TourService {
 			int id = Integer.parseInt(sec.fetchUser(token, jwtSecret));
 			Optional<User> data = user_repo.findById(id);
 			if (data.isPresent()) {
+				t.setAdminId(id);
 				repo.save(t);
 			} else {
 				System.out.println("Not Saved!!!!");
