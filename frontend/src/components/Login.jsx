@@ -40,7 +40,7 @@ function Login() {
   }
 }
   return (
-    <div class="container">
+    <div class="con">
       <div class="video">
         <video
           class="sub-container"

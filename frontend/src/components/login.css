@@ -11,7 +11,7 @@
   background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
 }
 
-.container {
+.con {
   display: flex;
   justify-content: flex-start;
   align-items: center;
