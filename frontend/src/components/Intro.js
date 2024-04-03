@@ -20,7 +20,7 @@ export default function Intro() {
             travel companion.
           </p>
           <button
-            className="btn intro-button me-2 nav-button mt-2"
+            className="btn intro-button me-2  mt-2"
             type="button"
           >
             Explore

@@ -4,12 +4,15 @@ CREATE TABLE IF NOT EXISTS tour (
     description LONGTEXT,
     start_date DATE,
     end_date DATE,
-    timestamp DATETIME,
+    timestamp VARCHAR(40),
     image VARCHAR(255),
     price INT,
     destination LONGTEXT,
     days INT,
-    PRIMARY KEY (tour_id)
+    admin_id INT,
+    PRIMARY KEY (tour_id),
+    FOREIGN KEY(admin_id) REFERENCES User(id)
+    ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS User(
