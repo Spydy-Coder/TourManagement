@@ -3,8 +3,39 @@ import Navbar from "../components/Navbar";
 import "./AdminPortal.css";
 import TourCard from "../components/TourCard";
 import SidebarCustom from "../components/SidebarCustom";
+import { useEffect, useState } from "react";
 
 export default function AdminPortal() {
+  const [userData, setUserData] = useState(null);
+  useEffect(() => {
+    let currUser = localStorage.getItem("token");
+    // console.log(currUser);
+
+    //Making API request to fetch user using token
+    const fetchData = async () => {
+      const response = await fetch("http://localhost:8080/api/auth/getuser", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          token: currUser,
+        },
+      });
+      // console.log(response);
+      const contentType = response.headers.get("content-type");
+      if ((!contentType || !contentType.includes("application/json"))) {
+        return;
+      }
+      if(!response.ok){
+        setUserData({id: false});
+        console.log("this is running");
+        return;
+      }
+      const json = await response.json();
+      // console.log(json);
+      setUserData(json);
+    };
+    fetchData();
+  }, []);
   return (
     <div className="container d-flex flex-column">
       <Navbar />
@@ -14,7 +45,7 @@ export default function AdminPortal() {
         </div>
         <div className="col-9">
           <div className="welcome-user">
-            <h4 className="welcome-text pt-3 text-muted">Welcome Bikash</h4>
+            <h4 className="welcome-text pt-3 text-muted">Welcome {userData.name}</h4>
           </div>
           <h4 className="mt-4">All Packages</h4>
           <hr></hr>
