@@ -23,7 +23,7 @@ public class UserService {
 	
 	private Security sec=new Security();
 	
-	public String login(User user) {
+	public String login(User user){
 		try
 		{
 //			System.out.println(user_repo.findByEmail(user.getEmail()).toString());
