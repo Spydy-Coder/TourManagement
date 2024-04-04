@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 
 export default function AdminPortal() {
   const [userData, setUserData] = useState(null);
+  const [Tour, setTour] = useState(null);
+
   useEffect(() => {
     let currUser = localStorage.getItem("token");
     // console.log(currUser);
@@ -35,7 +37,35 @@ export default function AdminPortal() {
       setUserData(json);
     };
     fetchData();
+
+    const fetchPin = async ()=>{
+
+      const response = await fetch("http://localhost:8080/api/pin/displayAll", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          token: currUser,
+        },
+      });
+      // console.log(response);
+      const contentType = response.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        return;
+      }
+      if (!response.ok) {
+        setTour({ tourId: false });
+        console.log("this is running");
+        return;
+      }
+      const json = await response.json();
+      // console.log(json);
+      setTour(json);
+
+    }
+    fetchPin();
   }, []);
+
+
   return (
     <div className="container d-flex flex-column">
       <Navbar />
@@ -55,15 +85,11 @@ export default function AdminPortal() {
           </div>
           <h4 className="mt-4">All Packages</h4>
           <hr></hr>
-          <TourCard />
-          <TourCard />
-          <TourCard />
-          <TourCard />
-          <TourCard />
-          <TourCard />
-          <TourCard />
-          <TourCard />
-          <TourCard />
+          {
+            Tour?.map((data)=>
+              <TourCard data={data}/>
+            )
+          }
         </div>
       </div>
     </div>
