@@ -51,7 +51,6 @@ public class TourService {
 	}
 
 	public Optional<Tour> display(int id, String token) {
-
 		return repo.findById(id);
 
 	}
