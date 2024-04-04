@@ -1,0 +1,13 @@
+.tourcard .price{
+    font-size: 20px;
+}
+.tourcard .tour-name{
+    letter-spacing: 1px;
+}
+.tour-card .tour-description{
+    text-align: justify;
+}
+.tourcard .card-image img {
+   min-height: 100%;
+   min-width: 100%;
+}

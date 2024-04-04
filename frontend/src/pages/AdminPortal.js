@@ -4,6 +4,7 @@ import "./AdminPortal.css";
 import TourCard from "../components/TourCard";
 import SidebarCustom from "../components/SidebarCustom";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function AdminPortal() {
   const [userData, setUserData] = useState(null);
@@ -38,8 +39,7 @@ export default function AdminPortal() {
     };
     fetchData();
 
-    const fetchPin = async ()=>{
-
+    const fetchPin = async () => {
       const response = await fetch("http://localhost:8080/api/pin/displayAll", {
         method: "GET",
         headers: {
@@ -58,13 +58,11 @@ export default function AdminPortal() {
         return;
       }
       const json = await response.json();
-      // console.log(json);
+      console.log(json);
       setTour(json);
-
-    }
+    };
     fetchPin();
   }, []);
-
 
   return (
     <div className="container d-flex flex-column">
@@ -85,11 +83,14 @@ export default function AdminPortal() {
           </div>
           <h4 className="mt-4">All Packages</h4>
           <hr></hr>
-          {
-            Tour?.map((data)=>
-              <TourCard data={data}/>
-            )
-          }
+          {Tour?.map((data) => (
+            <Link
+              to={`/tour/${data.tourId}`}
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <TourCard data={data} />
+            </Link>
+          ))}
         </div>
       </div>
     </div>
