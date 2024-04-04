@@ -1,0 +1,8 @@
+.tourind .tour-card-head{
+    color: #ff5555;
+    letter-spacing: 2px;
+}
+
+.tourind .tourcard{
+    box-shadow: 0 0 20px rgba(255, 199, 199, 0.941);
+}

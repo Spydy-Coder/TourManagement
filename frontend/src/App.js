@@ -5,6 +5,7 @@ import Create from "./pages/Create";
 
 import Home from "./pages/Home";
 import Login from "./components/Login";
+import Tour from "./pages/Tour";
 
 function App() {
   return(
@@ -14,6 +15,7 @@ function App() {
         <Route  path="/login" element={<Login/>}/>
         <Route  path="/admin/dashboard" element={<AdminPortal/>}/>
         <Route  path="/create" element={<Create/>}/>
+        <Route  path="/tour/:tourId" element={<Tour/>}/>
       </Routes>
 
     </Router>
