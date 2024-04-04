@@ -39,6 +39,7 @@ export default function Navbar() {
   }, []);
 
   const logout = () => {
+    console.log("loggingout");
     googleLogout();
     localStorage.clear();
     navigate("/");
