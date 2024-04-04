@@ -2,14 +2,52 @@ import React, { useState, useEffect } from "react";
 import { formatDistanceToNow } from "date-fns";
 import { IoCalendarNumberOutline } from "react-icons/io5";
 import { LuCalendarDays } from "react-icons/lu";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
+import { CiSquarePlus } from "react-icons/ci";
+import { CiSquareMinus } from "react-icons/ci";
 import tourback from "../images/tour-bg.jpg";
 import Navbar from "../components/Navbar";
-import "./Tour.css"
+import "./TourUser.css";
 
-export default function Tour() {
+export default function TourUser() {
+    const navigate = useNavigate();
   const [data, setData] = useState(null);
   const { tourId } = useParams(); // Assuming you're using React Router's useParams hook
+  const [person, setPerson] = useState(1);
+  const [userData, setUserData] = useState(null);
+
+  const handleIncrement = () => {
+    setPerson(person + 1);
+  };
+
+  const handleDecrement = () => {
+    if (person > 1) {
+      setPerson(person - 1);
+    }
+  };
+
+  const fetchData = async () => {
+    const response = await fetch("http://localhost:8080/api/auth/getuser", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        token: localStorage.getItem("token"),
+      },
+    });
+    const contentType = response.headers.get("content-type");
+    if ((!contentType || !contentType.includes("application/json"))) {
+        // navigate("/login");
+      return;
+    }
+    if(!response.ok){
+      setUserData({id: false});
+      console.log("this is running");
+      navigate("/login")
+      return;
+    }
+    const json = await response.json();
+    setUserData(json);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,22 +74,61 @@ export default function Tour() {
 
     fetchData(); // Call the fetchData function
   }, []);
+
+  const handleBuy = async () => {
+    try {
+        // Call fetchUserData first
+        await fetchData();
+
+        // Now proceed with the handleBuy logic
+        const response = await fetch('http://localhost/api/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                tourId: tourId,
+                NoOfPerson: person,
+                ClientName: userData?.name,
+                ClientId: userData?.id,
+                TotalPrice: person*data?.price
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to perform buy action');
+        }
+
+        // If the response is successful, you can handle it accordingly
+        const responseData = await response.json();
+        console.log('Buy request successful:', responseData);
+    } catch (error) {
+        console.error('Error performing buy action:', error);
+    }
+};
+
   const formatTimestamp = (timestamp) => {
     if (!timestamp) return "";
     return formatDistanceToNow(new Date(timestamp), { addSuffix: true });
   };
   return (
-    <div className="container tourind">
-        <Navbar/>
+    <div className="container touruserind">
+      <Navbar />
       <div className="row">
         <div className="col-12 col-md-5">
-          <img className="img-fluid" src={tourback} style={{minHeight:"80vh"}} alt="not found" />
+          <img
+            className="img-fluid"
+            src={tourback}
+            style={{ minHeight: "80vh" }}
+            alt="not found"
+          />
         </div>
         <div className="col-12 col-md-7 d-flex align-items-center flex-column justify-content-center">
-            <h5 className="text-uppercase tour-card-head">Navigate your adventures seamlessly</h5>
+          <h5 className="text-uppercase tour-card-head">
+            Navigate your adventures seamlessly
+          </h5>
           <div className="card my-3 tourcard " style={{ maxWidth: "100vw" }}>
             <div className="row g-0">
-              
               <div className="col-md-8">
                 <div className="card-body">
                   <h5 className="card-title text-uppercase  tour-name">
@@ -115,6 +192,24 @@ export default function Tour() {
                 />
               </div>
             </div>
+          </div>
+          <div className="d-flex gap-4 bottom">
+            <div className="d-flex gap-3 mt-1">
+              <button className="inc-btn" onClick={handleDecrement}>
+                <CiSquareMinus color="black" size={30} />
+              </button>
+              <span className="personholder text-center px-2">
+                {person}
+              </span>
+              <button
+                className="inc-btn "
+                style={{ backgroundColor: "white" }}
+                onClick={handleIncrement}
+              >
+                <CiSquarePlus color="black" size={30} />
+              </button>
+            </div>
+            <button className="btn buy-btn" onClick={handleBuy}>Buy</button>
           </div>
         </div>
       </div>

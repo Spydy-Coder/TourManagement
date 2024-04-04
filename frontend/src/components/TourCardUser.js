@@ -2,25 +2,26 @@ import React, { useEffect } from "react";
 import { formatDistanceToNow } from "date-fns";
 import { IoCalendarNumberOutline } from "react-icons/io5";
 import { LuCalendarDays } from "react-icons/lu";
-import "./TourCard.css";
-import AOS from "aos";
+import "./TourCardUser.css";
+import AOS from 'aos';
 
-export default function TourCard({ data }) {
+
+export default function TourCardUser({ data }) {
   const formatTimestamp = (timestamp) => {
     return formatDistanceToNow(new Date(timestamp), { addSuffix: true });
   };
   const limitDescription = (description) => {
     const words = description.split(' '); // Split description into array of words
-    const limitedWords = words.slice(0, 20); // Take first 20 words
+    const limitedWords = words.slice(0, 10); // Take first 20 words
     return limitedWords.join(' '); // Join the first 20 words back into a string
   };
 
   useEffect(()=>{
-AOS.init()
+    AOS.init();
   },[])
   return (
     <div>
-      <div className="card my-3 tourcard" data-aos="fade-right" data-aos-duration="600" style={{ maxWidth: "100vw" }}>
+      <div className="card my-3 tourcarduser " style={{ maxWidth: "100vw" }} data-aos="fade-right">
         <div className="row g-0">
           <div className="col-md-4  card-image">
             <img
@@ -79,14 +80,6 @@ AOS.init()
             </div>
           </div>
         </div>
-      </div>
-      <div className="d-flex gap-3 justify-content-end">
-        <button className="btn" style={{ minWidth: "90px" }}>
-          Edit
-        </button>
-        <button className="btn" style={{ minWidth: "90px" }}>
-          Delete
-        </button>
       </div>
     </div>
   );

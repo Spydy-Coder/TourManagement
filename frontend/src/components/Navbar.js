@@ -78,8 +78,8 @@ export default function Navbar() {
             <a className="nav-link fs-5 me-2" href="/#reviews">
               Reviews
             </a>
-            <a className="nav-link fs-5 me-2" href="#">
-              Bookings
+            <a className="nav-link fs-5 me-2" href="/packages">
+              Packages
             </a>
             <a className="nav-link fs-5 me-4" href="#footer">
               Contact
