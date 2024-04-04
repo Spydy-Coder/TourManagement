@@ -81,17 +81,16 @@ export default function TourUser() {
         await fetchData();
 
         // Now proceed with the handleBuy logic
-        const response = await fetch('http://localhost/api/', {
+        const response = await fetch('http://localhost:8080/api/booking/order', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "token":localStorage.getItem("token")
             },
             body: JSON.stringify({
-                tourId: tourId,
-                NoOfPerson: person,
-                ClientName: userData?.name,
-                ClientId: userData?.id,
-                TotalPrice: person*data?.price
+                tourid: tourId,
+                noofperson: person,
+                totalprice: person*data?.price
             })
         });
 
@@ -101,7 +100,7 @@ export default function TourUser() {
 
         // If the response is successful, you can handle it accordingly
         const responseData = await response.json();
-        console.log('Buy request successful:', responseData);
+        console.log('Buy request successful:', responseData.message);
     } catch (error) {
         console.error('Error performing buy action:', error);
     }

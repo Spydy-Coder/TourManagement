@@ -1,8 +1,10 @@
 package com.hughes.TourManagement.controller;
 
+import java.awt.SystemColor;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,7 +26,7 @@ public class BookingController {
 	private BookingService booking_serv;
 	
 	@RequestMapping(value = "/order", method = RequestMethod.POST)
-	public String placeOrder(@RequestHeader("token") String token, @RequestBody Booking booking) {
+	public ResponseEntity<String> placeOrder(@RequestHeader("token") String token, @RequestBody Booking booking) {
 		return booking_serv.placeOrder(booking, token);
 	}
 	
