@@ -45,23 +45,11 @@ public class TourService {
 	}
 
 	public List<Tour> findAll(String token) {
-		int id = Integer.parseInt(sec.fetchUser(token, jwtSecret));
-//		System.out.println("ID "+id);
-		Optional<User> data = user_repo.findById(id);
-		if (data.isPresent()) {
 			return repo.findAll();
-		} else
-			return null;
 	}
 
 	public Optional<Tour> display(int id, String token) {
-		int ID = Integer.parseInt(sec.fetchUser(token, jwtSecret));
-//		System.out.println("ID "+id);
-		Optional<User> data = user_repo.findById(ID);
-		if (data.isPresent()) {
 			return repo.findById(id);
-		} else
-			return null;
 	}
 
 	public void deleteById(int id, String token) {
