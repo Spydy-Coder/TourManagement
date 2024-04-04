@@ -6,7 +6,7 @@ import ReviewCard from "./ReviewCard";
 
 export default function Reviews() {
   return (
-    <div className="bg container ">
+    <div className="bg container " id="reviews">
       <h4 className="text-uppercase first-heading d-inline-block ">
         Where Adventures Begin:
       </h4>

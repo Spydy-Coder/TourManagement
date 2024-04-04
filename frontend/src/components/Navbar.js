@@ -74,8 +74,8 @@ export default function Navbar() {
             >
               Home
             </a>
-            <a className="nav-link fs-5 me-2" href="#">
-              About
+            <a className="nav-link fs-5 me-2" href="/#reviews">
+              Reviews
             </a>
             <a className="nav-link fs-5 me-2" href="#">
               Bookings

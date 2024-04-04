@@ -13,7 +13,7 @@ export default function ReviewCard() {
           </h6>
         </div>
         <footer className="blockquote-footer footer-text me-3 mt-1 justify-content-end d-flex">
-          Bikash Dalai{" "}
+          Bikash Dalai
         </footer>
       </div>
     </div>

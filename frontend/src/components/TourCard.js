@@ -15,15 +15,20 @@ export default function TourCard() {
           <div className="col-md-8">
             <div className="card-body">
               <h5 className="card-title">Card title</h5>
+             <h6 className="text-muted">Destination</h6>
               <p className="card-text">
                 This is a wider card with supporting text below as a natural
                 lead-in to additional content. This content is a little bit
                 longer.
               </p>
-              <p className="card-text">
+              
+            </div>
+            <div className="text-footer">
+            <p className="card-text">
                 <small className="text-muted">Last updated 3 mins ago</small>
               </p>
             </div>
+           
           </div>
         </div>
       </div>
