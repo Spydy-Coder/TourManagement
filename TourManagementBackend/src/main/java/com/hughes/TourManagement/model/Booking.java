@@ -14,16 +14,16 @@ public class Booking {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
-	@Column(name = "tourId")
-	private int tourId;
-	@Column(name = "NoOfPerson")
-	private int NoOfPerson;
-	@Column(name = "ClientName")
-	private String ClientName;
-	@Column(name = "ClientID")
-	private int ClientID;
-	@Column(name = "TotalPrice")
-	private int TotalPrice;
+	@Column(name = "tourid")
+	private int tourid;
+	@Column(name = "noofperson")
+	private int noofperson;
+	@Column(name = "clientname")
+	private String clientname;
+	@Column(name = "clientid")
+	private int clientid;
+	@Column(name = "totalprice")
+	private int totalprice;
 
 	Booking() {
 
@@ -33,58 +33,59 @@ public class Booking {
 		return id;
 	}
 
-	public int getClientID() {
-		return ClientID;
-	}
-
-	public void setClientID(int clientID) {
-		ClientID = clientID;
-	}
-
-	public int getTotalPrice() {
-		return TotalPrice;
-	}
-
-	public void setTotalPrice(int totalPrice) {
-		TotalPrice = totalPrice;
-	}
-
-	public Booking(int tourId, int noOfPerson, String clientName, int clientID, int totalPrice) {
+	public Booking(int tourid, int noofperson, String clientname, int clientid, int totalprice) {
 		super();
-		this.tourId = tourId;
-		NoOfPerson = noOfPerson;
-		ClientName = clientName;
-		ClientID = clientID;
-		TotalPrice = totalPrice;
+		this.tourid = tourid;
+		this.noofperson = noofperson;
+		this.clientname = clientname;
+		this.clientid = clientid;
+		this.totalprice = totalprice;
 	}
 
 	@Override
 	public String toString() {
-		return "Booking [id=" + id + ", tourId=" + tourId + ", NoOfPerson=" + NoOfPerson + ", ClientName=" + ClientName
-				+ ", ClientID=" + ClientID + ", TotalPrice=" + TotalPrice + "]";
+		return "Booking [id=" + id + ", tourid=" + tourid + ", noofperson=" + noofperson + ", clientname=" + clientname
+				+ ", clientid=" + clientid + ", totalprice=" + totalprice + "]";
 	}
 
-	public int getTourId() {
-		return tourId;
+	public int getTourid() {
+		return tourid;
 	}
 
-	public void setTourId(int tourId) {
-		this.tourId = tourId;
+	public void setTourid(int tourid) {
+		this.tourid = tourid;
 	}
 
-	public int getNoOfPerson() {
-		return NoOfPerson;
+	public int getNoofperson() {
+		return noofperson;
 	}
 
-	public void setNoOfPerson(int noOfPerson) {
-		NoOfPerson = noOfPerson;
+	public void setNoofperson(int noofperson) {
+		this.noofperson = noofperson;
 	}
 
-	public String getClientName() {
-		return ClientName;
+	public String getClientname() {
+		return clientname;
 	}
 
-	public void setClientName(String clientName) {
-		ClientName = clientName;
+	public void setClientname(String clientname) {
+		this.clientname = clientname;
 	}
+
+	public int getClientid() {
+		return clientid;
+	}
+
+	public void setClientid(int clientid) {
+		this.clientid = clientid;
+	}
+
+	public int getTotalprice() {
+		return totalprice;
+	}
+
+	public void setTotalprice(int totalprice) {
+		this.totalprice = totalprice;
+	}
+
 }
