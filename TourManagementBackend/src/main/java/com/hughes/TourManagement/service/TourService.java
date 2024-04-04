@@ -45,11 +45,14 @@ public class TourService {
 	}
 
 	public List<Tour> findAll(String token) {
-			return repo.findAll();
+
+		return repo.findAll();
+
 	}
 
 	public Optional<Tour> display(int id, String token) {
-			return repo.findById(id);
+		return repo.findById(id);
+
 	}
 
 	public void deleteById(int id, String token) {

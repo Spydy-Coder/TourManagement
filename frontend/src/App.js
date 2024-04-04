@@ -6,6 +6,8 @@ import Create from "./pages/Create";
 import Home from "./pages/Home";
 import Login from "./components/Login";
 import Tour from "./pages/Tour";
+import Packages from "./pages/Packages";
+import TourUser from "./pages/TourUser";
 
 function App() {
   return(
@@ -16,6 +18,8 @@ function App() {
         <Route  path="/admin/dashboard" element={<AdminPortal/>}/>
         <Route  path="/create" element={<Create/>}/>
         <Route  path="/tour/:tourId" element={<Tour/>}/>
+        <Route  path="/packages" element={<Packages/>}/>
+        <Route  path="/touruser/:tourId" element={<TourUser/>}/>
       </Routes>
 
     </Router>

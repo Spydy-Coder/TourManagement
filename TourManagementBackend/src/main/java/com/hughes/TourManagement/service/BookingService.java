@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.hughes.TourManagement.model.Booking;
@@ -15,21 +16,21 @@ import com.hughes.TourManagement.repository.ClientRepository;
 
 @Service
 public class BookingService {
-	
+
 	@Value("${jwt.expiration}")
 	private int jwtExpirationMs;
-	
+
 	@Value("${jwt.secret}")
 	private String jwtSecret;
-	
+
 	@Autowired
-	private BookingRepository booking_repo; 
+	private BookingRepository booking_repo;
 	@Autowired
 	private ClientRepository client_repo;
-	
+
 	private Security sec = new Security();
-	
-	public String placeOrder(Booking booking, String token) {
+
+	public ResponseEntity<String> placeOrder(Booking booking, String token) {
 		try {
 			int id = Integer.parseInt(sec.fetchUser(token, jwtSecret));
 			Optional<Client> data = client_repo.findById(id);
@@ -37,17 +38,17 @@ public class BookingService {
 				booking.setClientid(id);
 				booking.setClientname(data.get().getName());
 				booking_repo.save(booking);
-				return "Order placed";
+				return ResponseEntity.ok().body("{\"message\": \"Tour Added Successfully!\"}");
 			} else {
-				return ("Not Saved!!!!");
+				return ResponseEntity.badRequest().body("{\"message\": \"Data Not Saved!\"}");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "Error Occured!!!";
+			return ResponseEntity.badRequest().body("{\"message\": \"Error Occured!\"}");
 		}
 	}
-	
-	public List<Booking> getOrder(int id, String token){
+
+	public List<Booking> getOrder(int id, String token) {
 		try {
 			int ID = Integer.parseInt(sec.fetchUser(token, jwtSecret));
 			Optional<Client> data = client_repo.findById(ID);
