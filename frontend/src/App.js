@@ -8,6 +8,8 @@ import Login from "./components/Login";
 import Tour from "./pages/Tour";
 import Packages from "./pages/Packages";
 import TourUser from "./pages/TourUser";
+import LoginUser from "./components/LoginUser";
+import ShowBooking from "./components/ShowBooking";
 
 function App() {
   return(
@@ -20,6 +22,9 @@ function App() {
         <Route  path="/tour/:tourId" element={<Tour/>}/>
         <Route  path="/packages" element={<Packages/>}/>
         <Route  path="/touruser/:tourId" element={<TourUser/>}/>
+        <Route  path="/clientlogin" element={<LoginUser />}/>
+        <Route  path="showbooking/:tourId" element={<ShowBooking />}/>
+
       </Routes>
 
     </Router>
