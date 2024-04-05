@@ -46,13 +46,20 @@ private Security sec=new Security();
 	}
 	
 	public Client getClient(String token) {
-		int id=Integer.parseInt(sec.fetchUser(token, jwtSecret));
-//		System.out.println("ID "+id);
-		Optional<Client> data = client_repo.findById(id);
-		if(data.isPresent()) {
-			return data.get();
-		}
-		return null;
+	    try {
+	        int id = Integer.parseInt(sec.fetchUser(token, jwtSecret));
+	        Optional<Client> data = client_repo.findById(id);
+	        return data.orElse(null);
+	    } catch (NumberFormatException e) {
+	        // Handle case where the token does not contain a valid user ID
+	        System.err.println("Invalid user ID in token: " + token);
+	    } catch (Exception e) {
+	        // Handle other exceptions, such as database errors
+	        System.err.println("Error fetching client: " + e.getMessage());
+	    }
+	    // Return null if any exception occurs
+	    return null;
 	}
+
 
 }

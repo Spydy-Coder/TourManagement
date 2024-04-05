@@ -21,7 +21,7 @@ export default function TourCardUser({ data }) {
   },[])
   return (
     <div>
-      <div className="card my-3 tourcarduser " style={{ maxWidth: "100vw" }} data-aos="fade-right">
+      <div className="card my-3 tourcarduser " style={{ maxWidth: "100vw" }} data-aos="fade-right" data-aos-duration="600">
         <div className="row g-0">
           <div className="col-md-4  card-image">
             <img
