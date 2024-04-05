@@ -92,7 +92,6 @@ public class TourService {
 			previousTour.setDestination(tour.getDestination());
 			previousTour.setStartDate(tour.getStartDate());
 			previousTour.setEndDate(tour.getEndDate());
-			
 			repo.save(previousTour);
 		} else {
 			System.out.println("Error Updating!!!");
