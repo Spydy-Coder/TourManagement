@@ -4,23 +4,55 @@ import { IoCalendarNumberOutline } from "react-icons/io5";
 import { LuCalendarDays } from "react-icons/lu";
 import "./TourCard.css";
 import AOS from "aos";
+import { Link } from "react-router-dom";
 
 export default function TourCard({ data }) {
   const formatTimestamp = (timestamp) => {
     return formatDistanceToNow(new Date(timestamp), { addSuffix: true });
   };
   const limitDescription = (description) => {
-    const words = description.split(' '); // Split description into array of words
+    const words = description.split(" "); // Split description into array of words
     const limitedWords = words.slice(0, 20); // Take first 20 words
-    return limitedWords.join(' '); // Join the first 20 words back into a string
+    return limitedWords.join(" "); // Join the first 20 words back into a string
   };
 
-  useEffect(()=>{
-AOS.init()
-  },[])
+  useEffect(() => {
+    AOS.init();
+  }, []);
+
+  const handleDelete = async () => {
+    try {
+      // Make API call to delete the element
+      const response = await fetch(
+        `http://localhost:8080/api/pin/delete/${data.tourId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            token: localStorage.getItem("token"),
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to delete data");
+      }
+      // Show alert that the item is deleted
+      alert("Deleted");
+      // Navigate back to the admin dashboard directly by changing the URL
+      window.location.href = "/admin/dashboard";
+    } catch (error) {
+      console.error("Error deleting data:", error);
+    }
+  };
+
   return (
     <div>
-      <div className="card my-3 tourcard" data-aos="fade-right" data-aos-duration="600" style={{ maxWidth: "100vw" }}>
+      <div
+        className="card my-3 tourcard"
+        data-aos="fade-right"
+        data-aos-duration="600"
+        style={{ maxWidth: "100vw" }}
+      >
         <div className="row g-0">
           <div className="col-md-4  card-image">
             <img
@@ -38,7 +70,9 @@ AOS.init()
                 <strong className="text-muted">{data?.destination}</strong>
                 <strong className="text-danger price">₹{data?.price}</strong>
               </div>
-              <p className="card-text tour-description">{`${limitDescription(data?.description)} ...`}</p>
+              <p className="card-text tour-description">{`${limitDescription(
+                data?.description
+              )} ...`}</p>
               <div className="d-flex justify-content-between flex-md-row flex-column ">
                 <p className="card-text">
                   <h6 className="mb-0">
@@ -81,10 +115,18 @@ AOS.init()
         </div>
       </div>
       <div className="d-flex gap-3 justify-content-end">
-        <button className="btn" style={{ minWidth: "90px" }}>
+        <Link
+          to={`/edit/${data.tourId}`}
+          className="btn"
+          style={{ minWidth: "90px" }}
+        >
           Edit
-        </button>
-        <button className="btn" style={{ minWidth: "90px" }}>
+        </Link>
+        <button
+          className="btn"
+          style={{ minWidth: "90px" }}
+          onClick={handleDelete}
+        >
           Delete
         </button>
       </div>
