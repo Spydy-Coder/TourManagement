@@ -35,6 +35,7 @@ public class TourService {
 			if (data.isPresent()) {
 				t.setAdminId(id);
 				repo.save(t);
+				System.out.println("Saved Successfuly");
 			} else {
 				System.out.println("Not Saved!!!!");
 				return;
@@ -45,8 +46,17 @@ public class TourService {
 	}
 
 	public List<Tour> findAll(String token) {
-
-		return repo.findAll();
+		int ID = Integer.parseInt(sec.fetchUser(token, jwtSecret));
+		System.out.println("ID "+ID);
+		Optional<User> data = user_repo.findById(ID);
+		if (data.isPresent()) {
+			List<Tour> tour = repo.findByAdminId(ID);
+			for(Tour i : tour) {
+				System.out.println(i);
+			}
+			return tour;
+		}
+		else return null;
 
 	}
 
