@@ -87,6 +87,12 @@ public class TourService {
 			previousTour.setDays(tour.getDays());
 			previousTour.setName(tour.getName());
 			previousTour.setPrice(tour.getPrice());
+			previousTour.setImage(tour.getImage());
+			previousTour.setTimestamp(tour.getTimestamp());
+			previousTour.setDestination(tour.getDestination());
+			previousTour.setStartDate(tour.getStartDate());
+			previousTour.setEndDate(tour.getEndDate());
+			
 			repo.save(previousTour);
 		} else {
 			System.out.println("Error Updating!!!");
