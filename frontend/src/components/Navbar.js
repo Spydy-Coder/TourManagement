@@ -28,6 +28,7 @@ export default function Navbar() {
           }
           const json = await response.json();
           setUserData(json);
+          // console.log(json);
           localStorage.setItem("role",json.role);
         } catch (error) {
           console.error("Error fetching data:", error);
@@ -43,7 +44,7 @@ export default function Navbar() {
     console.log("loggingout");
     googleLogout();
     localStorage.clear();
-    navigate("/");
+    navigate(" ");
   };
 
   return (
@@ -85,54 +86,33 @@ export default function Navbar() {
               Contact
             </a>
           </div>
-<<<<<<< HEAD
-          <a href="/clientlogin">
-            <button className="btn  me-2 nav-button" type="button">
-              User
-            </button>
-          </a>
-          {userData && userData.id === false ? (
-=======
 
-          {userData && userData.role == "client" ? (
+          {userData && userData.role === "client" ? (
             <a href="/">
               <button className="btn  me-2 nav-button" type="button">
                 User
               </button>
             </a>
           ) : (
->>>>>>> 0586aa545e0be6a4469fc8f4c490a8f396269fd1
-            <a href="/login">
+            <a href="/clientlogin">
               <button className="btn  me-2 nav-button" type="button">
                 User
               </button>
             </a>
           )}
 
-          {userData && userData.role == "admin" ? (
+          {userData && userData.role === "admin" ? (
             <a href="/admin/dashboard">
               <button className="btn  me-2 nav-button" type="button">
                 Admin
               </button>
             </a>
           ) : (
-<<<<<<< HEAD
-            <button
-              className="btn  me-2 nav-button"
-              type="button"
-              onClick={() => {
-                logout();
-              }}
-            >
-              Logout
-            </button>
-=======
             <a href="/login">
               <button className="btn  me-2 nav-button" type="button">
                 Admin
               </button>
             </a>
->>>>>>> 0586aa545e0be6a4469fc8f4c490a8f396269fd1
           )}
 
           {userData ? (

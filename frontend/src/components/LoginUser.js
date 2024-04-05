@@ -31,7 +31,7 @@ function LoginUser() {
       //Save the auth-token and redirect.
       localStorage.clear();
       localStorage.setItem("token", await res.text());
-      navigate("/admin/dashboard");
+      navigate("/packages");
       console.log("Logged in Successfully");
     } else {
       console.log("Invalid Credentials");
