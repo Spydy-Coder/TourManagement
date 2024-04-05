@@ -17,7 +17,7 @@ function LoginUser() {
 
     
     //Making API request to make user........
-    const res = await fetch("http://localhost:8080/api/auth/login", {
+    const res = await fetch("http://localhost:8080/api/client/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

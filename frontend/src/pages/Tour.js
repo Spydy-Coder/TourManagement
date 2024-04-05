@@ -6,6 +6,7 @@ import { useParams } from "react-router";
 import tourback from "../images/tour-bg.jpg";
 import Navbar from "../components/Navbar";
 import "./Tour.css"
+import { Link } from "react-router-dom";
 
 export default function Tour() {
   const [data, setData] = useState(null);
@@ -116,6 +117,7 @@ export default function Tour() {
               </div>
             </div>
           </div>
+          <Link to={`/showbooking/${tourId}`}><button type="button">Show Bookings</button></Link>
         </div>
       </div>
     </div>
