@@ -10,11 +10,11 @@ import Navbar from "../components/Navbar";
 import "./TourUser.css";
 
 export default function TourUser() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [data, setData] = useState(null);
   const { tourId } = useParams(); // Assuming you're using React Router's useParams hook
   const [person, setPerson] = useState(1);
-  const [userData, setUserData] = useState(null);
+  const token = localStorage.getItem("token");
 
   const handleIncrement = () => {
     setPerson(person + 1);
@@ -24,29 +24,6 @@ export default function TourUser() {
     if (person > 1) {
       setPerson(person - 1);
     }
-  };
-
-  const fetchData = async () => {
-    const response = await fetch("http://localhost:8080/api/auth/getuser", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        token: localStorage.getItem("token"),
-      },
-    });
-    const contentType = response.headers.get("content-type");
-    if ((!contentType || !contentType.includes("application/json"))) {
-        // navigate("/login");
-      return;
-    }
-    if(!response.ok){
-      setUserData({id: false});
-      console.log("this is running");
-      navigate("/login")
-      return;
-    }
-    const json = await response.json();
-    setUserData(json);
   };
 
   useEffect(() => {
@@ -75,36 +52,42 @@ export default function TourUser() {
     fetchData(); // Call the fetchData function
   }, []);
 
-  const handleBuy = async () => {
+  const sendOrder = async () => {
     try {
-        // Call fetchUserData first
-        await fetchData();
+      const response = await fetch("http://localhost:8080/api/booking/order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          token: localStorage.getItem("token"),
+        },
+        body: JSON.stringify({
+          tourid: tourId,
+          noofperson: person,
+          totalprice: person * data?.price,
+        }),
+      });
 
-        // Now proceed with the handleBuy logic
-        const response = await fetch('http://localhost:8080/api/booking/order', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                "token":localStorage.getItem("token")
-            },
-            body: JSON.stringify({
-                tourid: tourId,
-                noofperson: person,
-                totalprice: person*data?.price
-            })
-        });
+      if (!response.ok) {
+        throw new Error("Failed to perform buy action");
+      }
 
-        if (!response.ok) {
-            throw new Error('Failed to perform buy action');
-        }
-
-        // If the response is successful, you can handle it accordingly
-        const responseData = await response.json();
-        console.log('Buy request successful:', responseData.message);
+      // If the response is successful, you can handle it accordingly
+      const responseData = await response.json();
+      console.log("Buy request successful:", responseData.message);
+      navigate("/packages");
     } catch (error) {
-        console.error('Error performing buy action:', error);
+      console.error("Error performing buy action:", error);
     }
-};
+  };
+
+  const handleBuy = async () => {
+    if(token && localStorage.getItem("role")=='user'){
+        sendOrder();
+    }
+    else{
+        navigate("/login/client")
+    }
+  };
 
   const formatTimestamp = (timestamp) => {
     if (!timestamp) return "";
@@ -197,9 +180,7 @@ export default function TourUser() {
               <button className="inc-btn" onClick={handleDecrement}>
                 <CiSquareMinus color="black" size={30} />
               </button>
-              <span className="personholder text-center px-2">
-                {person}
-              </span>
+              <span className="personholder text-center px-2">{person}</span>
               <button
                 className="inc-btn "
                 style={{ backgroundColor: "white" }}
@@ -208,7 +189,9 @@ export default function TourUser() {
                 <CiSquarePlus color="black" size={30} />
               </button>
             </div>
-            <button className="btn buy-btn" onClick={handleBuy}>Buy</button>
+            <button className="btn buy-btn" onClick={handleBuy}>
+              Buy
+            </button>
           </div>
         </div>
       </div>

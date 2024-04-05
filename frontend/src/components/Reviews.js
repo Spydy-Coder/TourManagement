@@ -16,19 +16,19 @@ export default function Reviews() {
         <div className="col-6">
           <div className="row ">
             <div className="col">
-              <ReviewCard />
+              <ReviewCard username={"Bikash Dalai"} destination={"Goa Trip"}/>
             </div>
             <div className="col"></div>
           </div>
           <div className="row">
             <div className="col"></div>
             <div className="col">
-              <ReviewCard />
+              <ReviewCard username={"Anshuman Saini"} destination={"Sikkim Trip"}/>
             </div>
           </div>
           <div className="row">
             <div className="col">
-              <ReviewCard />
+              <ReviewCard username={"Aakash"} destination={"Manali Trip"}/>
             </div>
             <div className="col"></div>
           </div>

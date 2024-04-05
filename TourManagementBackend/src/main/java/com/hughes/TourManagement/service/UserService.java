@@ -45,13 +45,21 @@ public class UserService {
 	}
 	
 	public User getUser(String token) {
-		int id=Integer.parseInt(sec.fetchUser(token, jwtSecret));
-//		System.out.println("ID "+id);
-		Optional<User> data = user_repo.findById(id);
-		if(data.isPresent()) {
-			return data.get();
-		}
-		return null;
+	    try {
+	        int id = Integer.parseInt(sec.fetchUser(token, jwtSecret));
+	        Optional<User> data = user_repo.findById(id);
+	        return data.orElse(null);
+	    } catch (NumberFormatException e) {
+	        // Handle invalid token format
+	        System.err.println("Invalid token format: " + token);
+	        e.printStackTrace();
+	        return null;
+	    } catch (Exception e) {
+	        // Handle other exceptions (e.g., database errors)
+	        System.err.println("Error fetching user: " + e.getMessage());
+	        return null;
+	    }
 	}
+
 
 }

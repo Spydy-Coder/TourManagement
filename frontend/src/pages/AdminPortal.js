@@ -4,17 +4,15 @@ import "./AdminPortal.css";
 import TourCard from "../components/TourCard";
 import SidebarCustom from "../components/SidebarCustom";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function AdminPortal() {
+  const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
   const [Tour, setTour] = useState(null);
 
   useEffect(() => {
     let currUser = localStorage.getItem("token");
-    // console.log(currUser);
-
-    //Making API request to fetch user using token
     const fetchData = async () => {
       const response = await fetch("http://localhost:8080/api/auth/getuser", {
         method: "GET",
@@ -34,10 +32,9 @@ export default function AdminPortal() {
         return;
       }
       const json = await response.json();
-      // console.log(json);
       setUserData(json);
     };
-    fetchData();
+    if (currUser) fetchData();
 
     const fetchPin = async () => {
       const response = await fetch("http://localhost:8080/api/pin/displayAll", {
@@ -67,32 +64,34 @@ export default function AdminPortal() {
   return (
     <div className="container d-flex flex-column">
       <Navbar />
-      <div className="row">
-        <div className="col-3">
-          <SidebarCustom />
-        </div>
-        <div className="col-9">
-          <div className="welcome-user">
-            {userData ? (
-              <h4 className="welcome-text pt-3 text-muted">
-                Welcome {userData.name}
-              </h4>
-            ) : (
-              <h4 className="welcome-text pt-3 text-muted">Welcome User</h4>
-            )}
+      {userData!=null ? (
+        <div className="row">
+          <div className="col-3">
+            <SidebarCustom />
           </div>
-          <h4 className="mt-4">All Packages</h4>
-          <hr></hr>
-          {Tour?.map((data) => (
-            <Link
-              to={`/tour/${data.tourId}`}
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
-              <TourCard data={data} />
-            </Link>
-          ))}
+          <div className="col-9">
+            <div className="welcome-user">
+              {userData ? (
+                <h4 className="welcome-text pt-3 text-muted">
+                  Welcome {userData.name}
+                </h4>
+              ) : (
+                <h4 className="welcome-text pt-3 text-muted">Welcome User</h4>
+              )}
+            </div>
+            <h4 className="mt-4">All Packages</h4>
+            <hr></hr>
+            {Tour?.map((data) => (
+              <Link
+                to={`/tour/${data.tourId}`}
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                <TourCard data={data} />
+              </Link>
+            ))}
+          </div>
         </div>
-      </div>
+      ): navigate("/")}
     </div>
   );
 }
