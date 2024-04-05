@@ -31,7 +31,9 @@ function LoginUser() {
       //Save the auth-token and redirect.
       localStorage.clear();
       localStorage.setItem("token", await res.text());
+      localStorage.setItem("role","client");
       navigate("/packages");
+
       console.log("Logged in Successfully");
     } else {
       console.log("Invalid Credentials");
@@ -61,7 +63,6 @@ function LoginUser() {
                 console.log("Login Failed");
               }}
             />
-            ;
           </div>
         </div>
       </div>

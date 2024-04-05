@@ -32,6 +32,7 @@ function Login() {
       //Save the auth-token and redirect.
       localStorage.clear();
       localStorage.setItem("token",await res.text());
+      localStorage.setItem("role","admin");
       navigate("/admin/dashboard");
       console.log("Logged in Successfully");
   }
@@ -63,7 +64,6 @@ function Login() {
                 console.log("Login Failed");
               }}
             />
-            ;
           </div>
         </div>
       </div>

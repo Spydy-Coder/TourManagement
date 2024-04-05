@@ -38,6 +38,11 @@ public class TourController {
 		return tservice.findAll(token);
 	}
 	
+	@GetMapping("/displayAllForClient")
+	public List<Tour> displayAllForClient(@RequestHeader("token") String token){
+		return tservice.findAllForClient(token);
+	}
+	
 	@GetMapping("/display/{id}")
 	public Optional<Tour> display(@PathVariable int id, @RequestHeader("token") String token){
 		return tservice.display(id, token);

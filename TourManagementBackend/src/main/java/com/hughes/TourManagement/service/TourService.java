@@ -47,16 +47,17 @@ public class TourService {
 
 	public List<Tour> findAll(String token) {
 		int ID = Integer.parseInt(sec.fetchUser(token, jwtSecret));
-		System.out.println("ID "+ID);
 		Optional<User> data = user_repo.findById(ID);
 		if (data.isPresent()) {
 			List<Tour> tour = repo.findByAdminId(ID);
-			for(Tour i : tour) {
-				System.out.println(i);
-			}
 			return tour;
-		}
-		else return null;
+		} else
+			return null;
+
+	}
+
+	public List<Tour> findAllForClient(String token) {
+		return repo.findAll();
 
 	}
 
@@ -67,7 +68,6 @@ public class TourService {
 
 	public void deleteById(int id, String token) {
 		int ID = Integer.parseInt(sec.fetchUser(token, jwtSecret));
-//		System.out.println("ID "+id);
 		Optional<User> data = user_repo.findById(ID);
 		if (data.isPresent()) {
 			repo.deleteById(id);
@@ -79,7 +79,6 @@ public class TourService {
 
 	public void update(Tour tour, int id, String token) {
 		int ID = Integer.parseInt(sec.fetchUser(token, jwtSecret));
-//		System.out.println("ID "+id);
 		Optional<User> data = user_repo.findById(ID);
 		if (data.isPresent()) {
 			Tour previousTour = repo.findById(id).orElse(null);

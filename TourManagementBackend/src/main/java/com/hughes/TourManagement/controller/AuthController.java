@@ -14,13 +14,13 @@ import com.hughes.TourManagement.service.AuthService;
 @CrossOrigin(origins = "http://localhost:3000/")
 @RequestMapping("/api/auth")
 public class AuthController {
-	
+
 	@Autowired
 	AuthService authService;
-	
+
 	@RequestMapping(value = "/check", method = RequestMethod.GET)
-	public ResponseEntity<String> check(@RequestHeader("token") String token){
-		return authService.check(token);
+	public ResponseEntity<String> check(@RequestHeader("token") String token, @RequestHeader("role") String role) {
+		return authService.check(token, role);
 	}
 
 }
