@@ -82,13 +82,13 @@ export default function AdminPortal() {
             </div>
             <h4 className="mt-4">All Packages</h4>
             <hr></hr>
-            {Tour?.map((data) => (
+            {Tour?.map((data,index) => (
               <>
               <Link
                 to={`/tour/${data.tourId}`}
                 style={{ textDecoration: "none", color: "inherit" }}
               >
-                <TourCard data={data} />
+                <TourCard data={data} key={index} />
               </Link>
               <EditDelete data={data}/>
               </>

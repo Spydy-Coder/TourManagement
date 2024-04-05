@@ -1,23 +1,27 @@
-import React from 'react'
-import { useEffect, useState } from 'react';
+import React from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import Navbar from './Navbar';
+import Navbar from "./Navbar";
+import "./ShowBooking.css";
 
 const ShowBooking = () => {
-    const [booking, setBooking] = useState(null);
-    const [data, setData] = useState(null);
-    const { tourId } = useParams();
+  const [booking, setBooking] = useState([]);
+  const [data, setData] = useState(null);
+  const { tourId } = useParams();
   useEffect(() => {
     let currUser = localStorage.getItem("token");
 
     const fetchData = async () => {
-      const response = await fetch(`http://localhost:8080/api/booking/getorder/${tourId}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          token: currUser,
-        },
-      });
+      const response = await fetch(
+        `http://localhost:8080/api/booking/getorder/${tourId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            token: currUser,
+          },
+        }
+      );
       // console.log(response);
       const contentType = response.headers.get("content-type");
       if (!contentType || !contentType.includes("application/json")) {
@@ -59,41 +63,45 @@ const ShowBooking = () => {
   }, []);
 
   return (
-    <div className='container'>
-      <Navbar/>
-      {console.log(booking)}
-      <table className="table  table-hover ">
-  <thead>
-    <tr className='table-danger border-1'>
-      <th scope="col">Booking ID</th>
-      <th scope="col">Tour ID</th>
-      <th scope="col">Tour Name</th>
-      <th scope="col">Client ID</th>
-      <th scope="col">Client Name</th>
-      <th scope="col">Number of Persons</th>
-      <th scope="col">Total Price</th>
-
-    </tr>
-  </thead>
-  <tbody>
-    {booking.map((bookingItem, index) => (
-      <tr key={index}>
-        <th scope="row">{bookingItem.id}</th>
-        <td>{bookingItem.tourid}</td>
-        <td>{data.name}</td>
-        <td>{bookingItem.clientid}</td>
-        <td>{bookingItem.clientname}</td>
-        <td>{bookingItem.noofperson}</td>
-        <td>{bookingItem.totalprice}</td>
-        
-      </tr>
-    ))}
-  </tbody>
-</table>
-
-
+    <div className="container table-contain">
+      <Navbar />
+      {console.log(booking.length)}
+      {booking.length >= 1 ? (
+        <table className="table  table-hover ">
+          <thead>
+            <tr className="table-danger border-1">
+              <th scope="col">Booking ID</th>
+              <th scope="col">Tour ID</th>
+              <th scope="col">Tour Name</th>
+              <th scope="col">Client ID</th>
+              <th scope="col">Client Name</th>
+              <th scope="col">Number of Persons</th>
+              <th scope="col">Total Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            {booking.map((bookingItem, index) => (
+              <tr key={index}>
+                <th scope="row">{bookingItem.id}</th>
+                <td>{bookingItem.tourid}</td>
+                <td>{data.name}</td>
+                <td>{bookingItem.clientid}</td>
+                <td>{bookingItem.clientname}</td>
+                <td>{bookingItem.noofperson}</td>
+                <td>{bookingItem.totalprice}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <>
+          <h4 className="text-uppercase text-light not-avail fw-bold text-center mt-4">
+            No Bookings Right Now
+          </h4>
+        </>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default ShowBooking
+export default ShowBooking;

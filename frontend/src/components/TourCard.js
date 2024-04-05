@@ -4,23 +4,30 @@ import { IoCalendarNumberOutline } from "react-icons/io5";
 import { LuCalendarDays } from "react-icons/lu";
 import "./TourCard.css";
 import AOS from "aos";
+import { Link } from "react-router-dom";
 
 export default function TourCard({ data }) {
   const formatTimestamp = (timestamp) => {
     return formatDistanceToNow(new Date(timestamp), { addSuffix: true });
   };
   const limitDescription = (description) => {
-    const words = description.split(' '); // Split description into array of words
+    const words = description.split(" "); // Split description into array of words
     const limitedWords = words.slice(0, 20); // Take first 20 words
-    return limitedWords.join(' '); // Join the first 20 words back into a string
+    return limitedWords.join(" "); // Join the first 20 words back into a string
   };
 
-  useEffect(()=>{
-AOS.init()
-  },[])
+  useEffect(() => {
+    AOS.init();
+  }, []);
+
   return (
     <div>
-      <div className="card my-3 tourcard" data-aos="fade-right" data-aos-duration="600" style={{ maxWidth: "100vw" }}>
+      <div
+        className="card my-3 tourcard"
+        data-aos="fade-right"
+        data-aos-duration="600"
+        style={{ maxWidth: "100vw" }}
+      >
         <div className="row g-0">
           <div className="col-md-4  card-image">
             <img
@@ -38,7 +45,9 @@ AOS.init()
                 <strong className="text-muted">{data?.destination}</strong>
                 <strong className="text-danger price">₹{data?.price}</strong>
               </div>
-              <p className="card-text tour-description">{`${limitDescription(data?.description)} ...`}</p>
+              <p className="card-text tour-description">{`${limitDescription(
+                data?.description
+              )} ...`}</p>
               <div className="d-flex justify-content-between flex-md-row flex-column ">
                 <p className="card-text">
                   <h6 className="mb-0">
@@ -52,7 +61,7 @@ AOS.init()
                       <IoCalendarNumberOutline
                         size={20}
                         className="me-1 mb-1"
-                      />{" "}
+                      />
                       Start Date
                     </h6>
                     <strong className="text-muted">{data?.startDate}</strong>
@@ -62,7 +71,7 @@ AOS.init()
                       <IoCalendarNumberOutline
                         size={20}
                         className="me-1 mb-1"
-                      />{" "}
+                      />
                       End Date
                     </h6>
                     <strong className="text-muted">{data?.endDate}</strong>
@@ -80,7 +89,6 @@ AOS.init()
           </div>
         </div>
       </div>
-    
     </div>
   );
 }

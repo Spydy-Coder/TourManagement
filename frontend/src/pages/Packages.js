@@ -10,7 +10,7 @@ export default function Packages() {
 
   useEffect(() => {
     const fetchPin = async () => {
-      const response = await fetch("http://localhost:8080/api/pin/displayAll", {
+      const response = await fetch("http://localhost:8080/api/pin/displayAllForClient", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
