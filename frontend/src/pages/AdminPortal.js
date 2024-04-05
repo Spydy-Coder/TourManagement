@@ -37,7 +37,7 @@ export default function AdminPortal() {
     if (currUser) fetchData();
 
     const fetchPin = async () => {
-      const response = await fetch("http://localhost:8080/api/pin/displayAll", {
+      const response = await fetch(`http://localhost:8080/api/pin/displayAll`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
