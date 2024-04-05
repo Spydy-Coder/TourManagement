@@ -61,7 +61,7 @@ export default function TourUser() {
           token: localStorage.getItem("token"),
         },
         body: JSON.stringify({
-          tourid: tourId,
+          tourid: parseInt(tourId),
           noofperson: person,
           totalprice: person * data?.price,
         }),
@@ -81,11 +81,11 @@ export default function TourUser() {
   };
 
   const handleBuy = async () => {
-    if(token && localStorage.getItem("role")=='user'){
+    if(token){
         sendOrder();
     }
     else{
-        navigate("/login/client")
+        navigate("/clientlogin")
     }
   };
 

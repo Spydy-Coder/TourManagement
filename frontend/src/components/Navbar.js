@@ -19,6 +19,7 @@ export default function Navbar() {
             headers: {
               "Content-Type": "application/json",
               token: currUser,
+              role: localStorage.getItem("role")
             },
           });
           if (!response.ok) {
@@ -28,6 +29,7 @@ export default function Navbar() {
           }
           const json = await response.json();
           setUserData(json);
+          console.log(json);
           localStorage.setItem("role",json.role);
         } catch (error) {
           console.error("Error fetching data:", error);
@@ -87,21 +89,21 @@ export default function Navbar() {
             </a>
           </div>
 
-          {userData && userData.role == "client" ? (
+          {userData && userData.role === "client" ? (
             <a href="/">
               <button className="btn  me-2 nav-button" type="button">
                 User
               </button>
             </a>
           ) : (
-            <a href="/login">
+            <a href="/clientlogin">
               <button className="btn  me-2 nav-button" type="button">
                 User
               </button>
             </a>
           )}
 
-          {userData && userData.role == "admin" ? (
+          {userData && userData.role === "admin" ? (
             <a href="/admin/dashboard">
               <button className="btn  me-2 nav-button" type="button">
                 Admin
