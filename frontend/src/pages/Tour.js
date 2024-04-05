@@ -117,7 +117,7 @@ export default function Tour() {
               </div>
             </div>
           </div>
-          <Link to={`/showbooking/${tourId}`}><button type="button">Show Bookings</button></Link>
+          <Link to={`/showbooking/${tourId}`}><button type="button" className="booking-btn">Show Bookings</button></Link>
         </div>
       </div>
     </div>

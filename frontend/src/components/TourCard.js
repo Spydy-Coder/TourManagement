@@ -20,31 +20,6 @@ export default function TourCard({ data }) {
     AOS.init();
   }, []);
 
-  const handleDelete = async () => {
-    try {
-      // Make API call to delete the element
-      const response = await fetch(
-        `http://localhost:8080/api/pin/delete/${data.tourId}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            token: localStorage.getItem("token"),
-          },
-        }
-      );
-      if (!response.ok) {
-        throw new Error("Failed to delete data");
-      }
-      // Show alert that the item is deleted
-      alert("Deleted");
-      // Navigate back to the admin dashboard directly by changing the URL
-      window.location.href = "/admin/dashboard";
-    } catch (error) {
-      console.error("Error deleting data:", error);
-    }
-  };
-
   return (
     <div>
       <div
@@ -86,7 +61,7 @@ export default function TourCard({ data }) {
                       <IoCalendarNumberOutline
                         size={20}
                         className="me-1 mb-1"
-                      />{" "}
+                      />
                       Start Date
                     </h6>
                     <strong className="text-muted">{data?.startDate}</strong>
@@ -96,7 +71,7 @@ export default function TourCard({ data }) {
                       <IoCalendarNumberOutline
                         size={20}
                         className="me-1 mb-1"
-                      />{" "}
+                      />
                       End Date
                     </h6>
                     <strong className="text-muted">{data?.endDate}</strong>
@@ -113,22 +88,6 @@ export default function TourCard({ data }) {
             </div>
           </div>
         </div>
-      </div>
-      <div className="d-flex gap-3 justify-content-end">
-        <Link
-          to={`/edit/${data.tourId}`}
-          className="btn"
-          style={{ minWidth: "90px" }}
-        >
-          Edit
-        </Link>
-        <button
-          className="btn"
-          style={{ minWidth: "90px" }}
-          onClick={handleDelete}
-        >
-          Delete
-        </button>
       </div>
     </div>
   );

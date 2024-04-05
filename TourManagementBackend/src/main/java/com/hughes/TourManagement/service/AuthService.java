@@ -9,25 +9,24 @@ import com.hughes.TourManagement.model.User;
 
 @Service
 public class AuthService {
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private ClientService clientService;
-	
-	public ResponseEntity<String> check(String token){
+
+	public ResponseEntity<String> check(String token, String role) {
 		User user = userService.getUser(token);
-		if(user==null) {
+		if (user == null) {
 			Client client = clientService.getClient(token);
-			if(client==null) {
+			if (client == null) {
 				return ResponseEntity.ok().body("{\"role\":\"none\"}");
 			}
-			return ResponseEntity.ok().body("{\"role\":\"client\"}");
+			return ResponseEntity.ok().body("{\"role\":" + "\"" + role + "\"" + "}");
 		}
-		return ResponseEntity.ok().body("{\"role\":\"admin\"}");
-		
-		
+		return ResponseEntity.ok().body("{\"role\":" + "\"" + role + "\"" + "}");
+
 	}
 
 }

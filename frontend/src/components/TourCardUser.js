@@ -53,7 +53,7 @@ export default function TourCardUser({ data }) {
                       <IoCalendarNumberOutline
                         size={20}
                         className="me-1 mb-1"
-                      />{" "}
+                      />
                       Start Date
                     </h6>
                     <strong className="text-muted">{data?.startDate}</strong>
@@ -63,7 +63,7 @@ export default function TourCardUser({ data }) {
                       <IoCalendarNumberOutline
                         size={20}
                         className="me-1 mb-1"
-                      />{" "}
+                      />
                       End Date
                     </h6>
                     <strong className="text-muted">{data?.endDate}</strong>

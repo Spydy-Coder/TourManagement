@@ -19,6 +19,7 @@ export default function Navbar() {
             headers: {
               "Content-Type": "application/json",
               token: currUser,
+              role: localStorage.getItem("role")
             },
           });
           if (!response.ok) {
@@ -28,7 +29,7 @@ export default function Navbar() {
           }
           const json = await response.json();
           setUserData(json);
-          // console.log(json);
+          console.log(json);
           localStorage.setItem("role",json.role);
         } catch (error) {
           console.error("Error fetching data:", error);
@@ -44,7 +45,8 @@ export default function Navbar() {
     console.log("loggingout");
     googleLogout();
     localStorage.clear();
-    navigate(" ");
+    setUserData(null);
+    navigate("/");
   };
 
   return (
