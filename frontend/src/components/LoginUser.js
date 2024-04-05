@@ -8,14 +8,11 @@ import "./login.css";
 
 function LoginUser() {
   const navigate = useNavigate();
-  const afterLogin = async (response) => { 
-    
+  const afterLogin = async (response) => {
     // console.log(response);
     const decode = jwtDecode(response.credential);
     console.log(decode);
 
-
-    
     //Making API request to make user........
     const res = await fetch("http://localhost:8080/api/client/login", {
       method: "POST",
@@ -28,19 +25,18 @@ function LoginUser() {
         image: decode.picture,
       }),
     });
-    console.log(typeof await res.status);
-    
-    if (await res.status === 200) {
+    console.log(typeof (await res.status));
+
+    if ((await res.status) === 200) {
       //Save the auth-token and redirect.
       localStorage.clear();
-      localStorage.setItem("token",await res.text());
+      localStorage.setItem("token", await res.text());
       navigate("/admin/dashboard");
       console.log("Logged in Successfully");
-  }
-  else{
-    console.log("Invalid Credentials");
-  }
-}
+    } else {
+      console.log("Invalid Credentials");
+    }
+  };
   return (
     <div class="con">
       <div class="video">
@@ -54,6 +50,7 @@ function LoginUser() {
           type="video/mp4"
         />
         <div class="button-container">
+          <h3 className="text-uppercase login-heading">User Login Page</h3>
           <div className="p-5">
             <img src={logo} alt="This is the logo" width="130px" />
           </div>

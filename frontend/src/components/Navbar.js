@@ -4,38 +4,39 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { googleLogout } from "@react-oauth/google";
+import { LuLogOut } from "react-icons/lu";
 
 export default function Navbar() {
   const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
   useEffect(() => {
     let currUser = localStorage.getItem("token");
-    // console.log(currUser);
-
-    //Making API request to fetch user using token
-    const fetchData = async () => {
-      const response = await fetch("http://localhost:8080/api/auth/getuser", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          token: currUser,
-        },
-      });
-      // console.log(response);
-      const contentType = response.headers.get("content-type");
-      if (!contentType || !contentType.includes("application/json")) {
-        return;
-      }
-      if (!response.ok) {
-        setUserData({ id: false });
-        console.log("this is running");
-        return;
-      }
-      const json = await response.json();
-      // console.log(json);
-      setUserData(json);
-    };
-    fetchData();
+    if (currUser) {
+      const fetchData = async () => {
+        try {
+          const response = await fetch("http://localhost:8080/api/auth/check", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              token: currUser,
+            },
+          });
+          if (!response.ok) {
+            setUserData({ id: false });
+            console.log("this is running");
+            return;
+          }
+          const json = await response.json();
+          setUserData(json);
+          localStorage.setItem("role",json.role);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      };
+      fetchData();
+    } else {
+      setUserData(null);
+    }
   }, []);
 
   const logout = () => {
@@ -84,18 +85,38 @@ export default function Navbar() {
               Contact
             </a>
           </div>
+<<<<<<< HEAD
           <a href="/clientlogin">
             <button className="btn  me-2 nav-button" type="button">
               User
             </button>
           </a>
           {userData && userData.id === false ? (
+=======
+
+          {userData && userData.role == "client" ? (
+            <a href="/">
+              <button className="btn  me-2 nav-button" type="button">
+                User
+              </button>
+            </a>
+          ) : (
+>>>>>>> 0586aa545e0be6a4469fc8f4c490a8f396269fd1
             <a href="/login">
+              <button className="btn  me-2 nav-button" type="button">
+                User
+              </button>
+            </a>
+          )}
+
+          {userData && userData.role == "admin" ? (
+            <a href="/admin/dashboard">
               <button className="btn  me-2 nav-button" type="button">
                 Admin
               </button>
             </a>
           ) : (
+<<<<<<< HEAD
             <button
               className="btn  me-2 nav-button"
               type="button"
@@ -105,7 +126,26 @@ export default function Navbar() {
             >
               Logout
             </button>
+=======
+            <a href="/login">
+              <button className="btn  me-2 nav-button" type="button">
+                Admin
+              </button>
+            </a>
+>>>>>>> 0586aa545e0be6a4469fc8f4c490a8f396269fd1
           )}
+
+          {userData ? (
+            <button
+              className="btn nav-button logout"
+              type="button"
+              onClick={() => {
+                logout();
+              }}
+            >
+              <LuLogOut size={23} className="ms-1" />
+            </button>
+          ) : null}
         </div>
       </div>
     </nav>
