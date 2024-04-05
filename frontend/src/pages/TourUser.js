@@ -109,7 +109,7 @@ export default function TourUser() {
           <h5 className="text-uppercase tour-card-head">
             Navigate your adventures seamlessly
           </h5>
-          <div className="card my-3 tourcard " style={{ maxWidth: "100vw" }}>
+          <div className="card my-3 tourcard " style={{ maxWidth: "100vw" }} data-aos="fade-right" data-aos-duration="600">
             <div className="row g-0">
               <div className="col-md-8">
                 <div className="card-body">

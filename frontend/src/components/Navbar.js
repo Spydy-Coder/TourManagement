@@ -43,6 +43,7 @@ export default function Navbar() {
     console.log("loggingout");
     googleLogout();
     localStorage.clear();
+    setUserData(null);
     navigate("/");
   };
 

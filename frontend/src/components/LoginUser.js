@@ -31,6 +31,7 @@ function LoginUser() {
       //Save the auth-token and redirect.
       localStorage.clear();
       localStorage.setItem("token", await res.text());
+      localStorage.setItem("role","user");
       navigate("/admin/dashboard");
       console.log("Logged in Successfully");
     } else {

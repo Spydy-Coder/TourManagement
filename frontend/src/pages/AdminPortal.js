@@ -5,6 +5,7 @@ import TourCard from "../components/TourCard";
 import SidebarCustom from "../components/SidebarCustom";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import EditDelete from "../components/EditDelete";
 
 export default function AdminPortal() {
   const navigate = useNavigate();
@@ -82,12 +83,15 @@ export default function AdminPortal() {
             <h4 className="mt-4">All Packages</h4>
             <hr></hr>
             {Tour?.map((data) => (
+              <>
               <Link
                 to={`/tour/${data.tourId}`}
                 style={{ textDecoration: "none", color: "inherit" }}
               >
                 <TourCard data={data} />
               </Link>
+              <EditDelete data={data}/>
+              </>
             ))}
           </div>
         </div>
