@@ -35,3 +35,7 @@ button:hover {
   font-weight: 400;
   font-style: normal;
 }
+
+.navbar .logout{
+  width: 50px;  
+}
