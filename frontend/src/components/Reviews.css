@@ -1,5 +1,5 @@
 .bg {
-  background-image: url("../images/bg.jpg");
+  background-image: url("../images/bg-transformed.jpeg");
   background-size: cover; /* Ensure the background covers the entire element */
   background-repeat: no-repeat;
   width: 100vw; /* Set the width to 100% of the viewport width */

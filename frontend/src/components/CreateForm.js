@@ -1,6 +1,7 @@
 import React from "react";
 import "./CreateForm.css";
 import { useState } from "react";
+import Swal from 'sweetalert2';
 
 export default function CreateForm() {
   const [formData, setFormData] = useState({
@@ -54,6 +55,11 @@ export default function CreateForm() {
         body: JSON.stringify(finalData),
       });
       const data = await response.json();
+      Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: 'Tour Created!',
+      });
       console.log("Server response:", data.message);
       handleClear();
     } catch (error) {

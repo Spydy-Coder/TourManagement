@@ -31,13 +31,13 @@ export default function EditDelete({ data }) {
       <div className="d-flex gap-3 justify-content-end">
         <Link
           to={`/edit/${data.tourId}`}
-          className="btn"
+          className="btn text-white fw-bold"
           style={{ minWidth: "90px" }}
         >
           Edit
         </Link>
         <button
-          className="btn"
+          className="btn text-white fw-bold"
           style={{ minWidth: "90px" }}
           onClick={handleDelete}
         >

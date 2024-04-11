@@ -2,10 +2,12 @@ import React, { useEffect } from "react";
 import "./EditForm.css";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import Swal from 'sweetalert2';
+import { useNavigate } from "react-router-dom";
 
 export default function EditForm() {
   const { id } = useParams();
-  console.log("EditForm:", id);
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -90,8 +92,13 @@ export default function EditForm() {
       });
 
       console.log(updatedData);
+      Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: 'Updated Successfully!',
+      });
 
-      window.location.href = "/admin/dashboard";
+      navigate("/admin/dashboard");
 
       const responseData = await response.json();
 

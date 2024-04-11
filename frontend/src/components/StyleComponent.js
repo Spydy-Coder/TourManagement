@@ -4,7 +4,7 @@ import destination from "../images/icons/destination.png"
 import bill from "../images/icons/credit-card.png"
 import suitcase from "../images/icons/suitcase.png"
 import "./StyleComponent.css"
-import world from "../images/world.jpg"
+import world from "../images/world-transformed.jpeg"
 
 export default function StyleComponent() {
   return (
@@ -20,6 +20,7 @@ export default function StyleComponent() {
                 alt="Icon"
                 className="img-fluid  my-auto icons"
                 style={{width: "40px", height: "40px"}}
+                loading="lazy"
               />
               <div className="ms-4" >
                 <h5 className="mb-0 text-muted fw-bold">Make a Choice</h5>

@@ -84,7 +84,7 @@ export default function Navbar() {
             <a className="nav-link fs-5 me-2" href="/packages">
               Packages
             </a>
-            <a className="nav-link fs-5 me-4" href="#footer">
+            <a className="nav-link fs-5 me-4" href="/#footer">
               Contact
             </a>
           </div>
