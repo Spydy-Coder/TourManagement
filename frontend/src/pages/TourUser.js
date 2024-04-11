@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import { formatDistanceToNow } from "date-fns";
 import { IoCalendarNumberOutline } from "react-icons/io5";
 import { LuCalendarDays } from "react-icons/lu";
 import { useNavigate, useParams } from "react-router";
 import { CiSquarePlus } from "react-icons/ci";
 import { CiSquareMinus } from "react-icons/ci";
-import tourback from "../images/tour-bg.jpg";
+import tourback from "../images/tour-bg-2.jpeg";
 import Navbar from "../components/Navbar";
 import "./TourUser.css";
+import Swal from "sweetalert2";
 
 export default function TourUser() {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ export default function TourUser() {
   const { tourId } = useParams(); // Assuming you're using React Router's useParams hook
   const [person, setPerson] = useState(1);
   const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role");
 
   const handleIncrement = () => {
     setPerson(person + 1);
@@ -48,8 +50,7 @@ export default function TourUser() {
         console.error("Error fetching data:", error);
       }
     };
-
-    fetchData(); // Call the fetchData function
+    fetchData();
   }, []);
 
   const sendOrder = async () => {
@@ -74,6 +75,12 @@ export default function TourUser() {
       // If the response is successful, you can handle it accordingly
       const responseData = await response.json();
       console.log("Buy request successful:", responseData.message);
+      Swal.fire({
+        icon: "success",
+        title: "Success!",
+        text: "Booked Successfully!",
+      });
+
       navigate("/packages");
     } catch (error) {
       console.error("Error performing buy action:", error);
@@ -81,11 +88,16 @@ export default function TourUser() {
   };
 
   const handleBuy = async () => {
-    if(token){
-        sendOrder();
-    }
-    else{
-        navigate("/clientlogin")
+    if (token && role === "client") {
+      sendOrder();
+    } else if (token && role !== "client") {
+      Swal.fire({
+        icon: "info",
+        title: "Login",
+        text: "Please Login as Client!",
+      });
+    } else {
+      navigate("/clientlogin");
     }
   };
 
@@ -96,6 +108,7 @@ export default function TourUser() {
   return (
     <div className="container touruserind">
       <Navbar />
+
       <div className="row">
         <div className="col-12 col-md-5">
           <img
@@ -103,13 +116,20 @@ export default function TourUser() {
             src={tourback}
             style={{ minHeight: "80vh" }}
             alt="not found"
+            data-aos="fade-right"
           />
         </div>
         <div className="col-12 col-md-7 d-flex align-items-center flex-column justify-content-center">
           <h5 className="text-uppercase tour-card-head">
             Navigate your adventures seamlessly
           </h5>
-          <div className="card my-3 tourcard " style={{ maxWidth: "100vw" }} data-aos="fade-right" data-aos-duration="600">
+
+          <div
+            className="card my-3 tourcard "
+            style={{ maxWidth: "100vw" }}
+            data-aos="fade-right"
+            data-aos-duration="600"
+          >
             <div className="row g-0">
               <div className="col-md-8">
                 <div className="card-body">
@@ -175,6 +195,7 @@ export default function TourUser() {
               </div>
             </div>
           </div>
+
           <div className="d-flex gap-4 bottom">
             <div className="d-flex gap-3 mt-1">
               <button className="inc-btn" onClick={handleDecrement}>

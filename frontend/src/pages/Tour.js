@@ -3,7 +3,7 @@ import { formatDistanceToNow } from "date-fns";
 import { IoCalendarNumberOutline } from "react-icons/io5";
 import { LuCalendarDays } from "react-icons/lu";
 import { useParams } from "react-router";
-import tourback from "../images/tour-bg.jpg";
+import tourback from "../images/tour-bg-2.jpeg";
 import Navbar from "../components/Navbar";
 import "./Tour.css"
 import { Link } from "react-router-dom";

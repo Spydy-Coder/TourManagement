@@ -1,6 +1,6 @@
 import React from "react";
 import "./Intro.css";
-import intro from "../images/intro.jpg";
+import intro from "../images/intro-transformed.jpeg";
 import { Link } from "react-router-dom";
 
 const scrollToElement = (elementId) => {
@@ -36,7 +36,7 @@ export default function Intro() {
           </button>
         </div>
         <div className="col-12 col-md-5">
-          <img src={intro} className="img-fluid" alt="Not found" />
+          <img src={intro} className="img-fluid" alt="Not found" loading="lazy" />
         </div>
       </div>
     </div>
